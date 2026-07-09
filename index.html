@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Wren — Interior Design</title>
+<meta name="description" content="Studio Wren designs interiors for private residences and boutique hospitality. London, by referral and appointment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F2; --paper-2:#F3EEE5;
+    --ink:#1C1A17; --muted:#6B655C; --clay:#B5673A;
+    --line:rgba(28,26,23,.12);
+    --ease:cubic-bezier(0.16,1,0.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'Inter',sans-serif; font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Newsreader',serif; font-weight:400; line-height:1.15}
+  em{font-style:italic; color:var(--clay)}
+  a{color:inherit}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 48px}
+  @media(max-width:640px){.wrap{padding:0 24px}}
+
+  /* fade-only reveal — no stagger choreography, no parallax */
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity 1s var(--ease), transform 1s var(--ease)}
+  .reveal.in{opacity:1; transform:none}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(250,247,242,.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line)}
+  nav{display:flex; align-items:center; justify-content:space-between; padding:22px 0}
+  .logo{font-family:'Newsreader',serif; font-size:18px; letter-spacing:.08em}
+  .roman-nav{display:flex; gap:34px; list-style:none; font-size:13px; letter-spacing:.02em}
+  .roman-nav a{text-decoration:none; border-bottom:1px solid transparent; padding-bottom:2px; transition:border-color .3s var(--ease)}
+  .roman-nav a:hover{border-color:var(--clay)}
+  .contact-link{font-size:13px; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line)}
+  .contact-link:hover{text-decoration-color:var(--clay)}
+  .nav-toggle{display:none}
+  @media(max-width:760px){.roman-nav{display:none}}
+
+  section{padding:120px 0}
+  @media(max-width:760px){section{padding:72px 0}}
+  .chapter-label{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--clay); margin-bottom:28px; display:block}
+
+  /* intro */
+  .intro-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; align-items:start; margin-top:40px}
+  @media(max-width:900px){.intro-grid{grid-template-columns:1fr}}
+  .intro-grid p{font-size:18px; line-height:1.85; color:var(--ink); margin-bottom:22px; max-width:52ch}
+  .footnote{font-size:13px; color:var(--muted); margin-top:36px; padding-top:18px; border-top:1px solid var(--line); max-width:52ch}
+  .footnote sup{color:var(--clay)}
+  sup.mark{color:var(--clay); font-size:.7em}
+
+  h1.headline{font-size:clamp(34px,5vw,58px); max-width:14ch; font-weight:400}
+
+  blockquote{font-family:'Newsreader',serif; font-style:italic; font-size:clamp(22px,2.6vw,30px); line-height:1.5; max-width:22ch; margin:64px 0; color:var(--ink)}
+  blockquote::before{content:''; display:block; width:40px; height:1px; background:var(--clay); margin-bottom:24px}
+
+  /* photography placeholders */
+  figure{margin:0}
+  .photo{aspect-ratio:var(--ar,3/2); position:relative; overflow:hidden; background:
+      radial-gradient(ellipse at 30% 20%, rgba(181,103,58,.10), transparent 55%),
+      linear-gradient(155deg, var(--p1,#E4D9C8), var(--p2,#C9B9A0) 60%, var(--p3,#B0A088));
+  }
+  .photo::after{content:'';position:absolute; inset:0; background:repeating-linear-gradient(115deg, rgba(28,26,23,.03) 0px, rgba(28,26,23,.03) 1px, transparent 1px, transparent 5px)}
+  figcaption{font-size:12px; color:var(--muted); margin-top:14px; font-style:italic; font-family:'Newsreader',serif}
+  .full-bleed{width:100vw; position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw}
+  .full-bleed .photo{aspect-ratio:16/7}
+  @media(max-width:760px){.full-bleed .photo{aspect-ratio:4/5}}
+  .full-bleed figcaption{max-width:1180px; margin-left:auto; margin-right:auto; padding:0 48px}
+
+  /* case study */
+  .case-heading{font-size:clamp(28px,3.6vw,44px); max-width:16ch; margin:20px 0 26px}
+  .case-body{font-size:17px; line-height:1.85; color:var(--muted); max-width:62ch; margin-bottom:20px}
+  .gallery{display:grid; grid-template-columns:1.2fr .8fr; gap:2px; margin-top:56px}
+  @media(max-width:760px){.gallery{grid-template-columns:1fr}}
+  .gallery .cell{display:flex; flex-direction:column; gap:14px}
+  .gallery .cell:nth-child(2){margin-top:60px}
+  @media(max-width:760px){.gallery .cell:nth-child(2){margin-top:0}}
+
+  /* notes / journal */
+  .notes-list{list-style:none; margin-top:40px; border-top:1px solid var(--line)}
+  .notes-list li{padding:28px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:70px 1fr; gap:24px; font-size:17px; line-height:1.7; color:var(--ink)}
+  .notes-list li span{font-family:'Newsreader',serif; font-style:italic; color:var(--clay); font-size:15px}
+  @media(max-width:600px){.notes-list li{grid-template-columns:1fr; gap:6px}}
+
+  /* contact */
+  .contact-section p{font-size:17px; line-height:1.8; color:var(--muted); max-width:44ch; margin-bottom:14px}
+  .contact-section .mail{font-family:'Newsreader',serif; font-style:italic; font-size:26px; display:inline-block; margin-top:10px; text-decoration:underline; text-decoration-color:var(--line); text-underline-offset:5px}
+  .contact-section .mail:hover{text-decoration-color:var(--clay)}
+
+  footer{border-top:1px solid var(--line); padding:44px 0}
+  .foot-row{display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px; font-size:12px; color:var(--muted)}
+  .foot-row a{text-decoration:none}
+  .foot-row a:hover{color:var(--clay)}
+  .foot-links{display:flex; gap:24px; list-style:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a href="#" class="logo">STUDIO WREN</a>
+      <ul class="roman-nav">
+        <li><a href="#studio">I. Studio</a></li>
+        <li><a href="#residential">II. Residential</a></li>
+        <li><a href="#hospitality">III. Hospitality</a></li>
+        <li><a href="#notes">IV. Notes</a></li>
+      </ul>
+      <a href="mailto:hello@studiowren.com" class="contact-link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section id="studio" style="padding-top:80px">
+  <div class="wrap">
+    <span class="chapter-label reveal">I. Studio</span>
+    <h1 class="headline reveal">Interiors for people who already know what they don't want to repeat.</h1>
+
+    <div class="intro-grid">
+      <div class="reveal">
+        <figure>
+          <div class="photo" style="--ar:4/5; --p1:#E8DFD1; --p2:#CDB99C; --p3:#A8927A"></div>
+          <figcaption>Sitting room, a Georgian townhouse. Photography — Studio Wren.</figcaption>
+        </figure>
+      </div>
+      <div class="reveal">
+        <p>Studio Wren designs interiors for private residences and a small number of hospitality projects. Founded in 2015, the studio holds every commission to the same standard: nothing arrives because it was available. Every material, fixture and proportion is chosen in relation to what's already there — the light, the age of the building, the people who will actually use the room.<sup class="mark">1</sup></p>
+        <p>The practice is deliberately small. A handful of projects run at any time, each seen through by the same two people from first site visit to final placement of the last object.</p>
+        <div class="footnote">
+          <sup>1</sup> The studio's approach to material honesty was the subject of a short feature in <em>The Local Review</em>, 2023.
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="reveal">Restraint is not the absence of decision. It's the discipline of making fewer, better ones.</blockquote>
+  </div>
+</section>
+
+<div class="full-bleed reveal">
+  <div class="photo" style="--p1:#DED1BC; --p2:#B9A484; --p3:#8F7B60"></div>
+  <figcaption>Kitchen, reclaimed oak and hand-plastered walls. FIG 1.</figcaption>
+</div>
+
+<section id="residential">
+  <div class="wrap">
+    <span class="chapter-label reveal">II. Residential</span>
+    <h2 class="case-heading reveal">A Georgian house, restored — not renovated.</h2>
+    <p class="case-body reveal">The brief was simple to state and hard to execute: keep what a hundred years had already gotten right, and repair the twenty that hadn't. Studio Wren stripped three later additions back to the original floor plan, re-plastered by hand, and sourced reclaimed oak flooring within four streets of the house to match its existing grain and wear.</p>
+    <p class="case-body reveal">The result reads as though nothing was done at all — which took considerably longer than doing something would have.</p>
+
+    <div class="gallery">
+      <div class="cell reveal">
+        <figure>
+          <div class="photo" style="--ar:3/2; --p1:#E2D6C4; --p2:#B7A283; --p3:#8C7A62"></div>
+          <figcaption>Principal bedroom, before first light.</figcaption>
+        </figure>
+      </div>
+      <div class="cell reveal">
+        <figure>
+          <div class="photo" style="--ar:4/5; --p1:#DAD0BE; --p2:#AE9B7D; --p3:#7E6D55"></div>
+          <figcaption>Staircase detail, original 1820s balustrade retained.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hospitality" style="background:var(--paper-2)">
+  <div class="wrap">
+    <span class="chapter-label reveal">III. Hospitality</span>
+    <h2 class="case-heading reveal">A ten-room hotel that doesn't try to be a hotel.</h2>
+    <p class="case-body reveal">Commissioned by a small hospitality group opening its second property, Studio Wren was asked to avoid every convention of boutique-hotel design — no signature colour, no designated photo corner, no branding louder than the building itself.</p>
+    <p class="case-body reveal">Furniture was sourced across four countries over eight months, mixing periods deliberately rather than curating a single "look." The result feels collected, not decorated — the studio's standard test for whether a room is finished.</p>
+
+    <div class="gallery">
+      <div class="cell reveal">
+        <figure>
+          <div class="photo" style="--ar:3/2; --p1:#E6DCC9; --p2:#C3AD8B; --p3:#96826A"></div>
+          <figcaption>Lobby, reception desk in reclaimed elm.</figcaption>
+        </figure>
+      </div>
+      <div class="cell reveal">
+        <figure>
+          <div class="photo" style="--ar:4/5; --p1:#DFD3BE; --p2:#B4A181; --p3:#877459"></div>
+          <figcaption>Room 4, corner suite. FIG 2.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="notes">
+  <div class="wrap">
+    <span class="chapter-label reveal">IV. Notes</span>
+    <h2 class="case-heading reveal">Working notes, unfiled.</h2>
+    <ul class="notes-list">
+      <li class="reveal"><span>On materials</span> The ones that age well were never trying to look new.</li>
+      <li class="reveal"><span>On lighting</span> Most rooms have too many light sources and not one good one.</li>
+      <li class="reveal"><span>On restraint</span> The last ten percent of decisions — what to remove — takes as long as the first ninety.</li>
+      <li class="reveal"><span>On timing</span> A room isn't finished when it's furnished. It's finished when nothing left in it needs explaining.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <div class="wrap">
+    <span class="chapter-label reveal">Contact</span>
+    <p class="reveal">Studio Wren takes on a small number of projects each year, by referral and direct enquiry. London, and by appointment elsewhere.</p>
+    <a href="mailto:hello@studiowren.com" class="mail reveal">hello@studiowren.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>Studio Wren — London</span>
+    <ul class="foot-links">
+      <li><a href="#studio">I</a></li>
+      <li><a href="#residential">II</a></li>
+      <li><a href="#hospitality">III</a></li>
+      <li><a href="#notes">IV</a></li>
+      <li><a href="mailto:hello@studiowren.com">Contact</a></li>
+    </ul>
+    <span>© <span id="year"></span> Studio Wren. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Fade-only reveal — deliberately no stagger/parallax/count-up (Archetype B, not A)
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// smooth scroll for in-page nav
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
